@@ -13,24 +13,32 @@ export class ServicesService {
   constructor(private http:HttpClient) { }
 
   addParticipant(data:any):Observable<any>{
-    return this.http.post('http://localhost:3000/participants',data);
+    return this.http.post('http://localhost:3000/api/v1/participants',data);
   }
   getParticipants():Observable<any>{
-    return this.http.get('http://localhost:3000/participants');
+    return this.http.get('http://localhost:3000/api/v1/participants');
 
   }
 
   public getParticipantWithRankingOne(): Observable<any> {
-    return this.http.get<Participant[]>('http://localhost:3000/participants').pipe(
+    return this.http.get<Participant[]>('http://localhost:3000/api/v1/participants').pipe(
       map(participants => participants.find(participant => participant.ranking === 1))
     );
   }
 
   getCenterById(id: number): Observable<any> {
-    return this.http.get<Center[]>('http://localhost:3000/centers').pipe(
+    return this.http.get<Center[]>('http://localhost:3000/api/v1/centers').pipe(
       map((centers: Center[]) => centers.find(center => center.id === id))
     );
   }
+
+  public getParticipantWithHighRanking(): Observable<any> {
+    return this.http.get<Participant[]>('http://localhost:3000/api/v1/participants').pipe(
+      map(participants => participants.find(participant => participant.ranking <= 3))
+    );
+  }
+
+
 
 
 }

@@ -11,7 +11,8 @@ import {Center} from "../../participant/model/Center";
 })
 export class HomeComponent implements OnInit {
 
-  participant: { firstName: string; lastName: string; photoUrl: string; centerId: number; recordTime: string; ranking: number; id: string }={id: '', firstName: '', lastName: '', photoUrl: '', centerId: 0, ranking: 0, recordTime: ''};
+
+  participant: { firstName: string; lastName: string; photoUrl: string; centerId: number; recordTime: string; ranking: number; id: string } ={id: '', firstName: '', lastName: '', photoUrl: '', centerId: 0, ranking: 0, recordTime: ''};
   center:Center = { id: 0, name: '' };
   constructor(private partService:ServicesService) {
   }
@@ -22,8 +23,11 @@ export class HomeComponent implements OnInit {
         this.participant = participant;
         this.partService.getCenterById(participant.centerId).subscribe((center) => {
           this.center = center;
+          console.log(this.center)
         });
     });
+
+
   }
 
 
